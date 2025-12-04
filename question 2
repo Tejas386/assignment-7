@@ -1,0 +1,55 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void improvedSelectionSort(vector<int>& arr) {
+    int n = arr.size();
+    int start = 0;
+    int end = n - 1;
+    
+    while (start < end) {
+        int minIdx = start;
+        int maxIdx = start;
+        
+        for (int i = start + 1; i <= end; i++) {
+            if (arr[i] < arr[minIdx]) {
+                minIdx = i;
+            }
+            if (arr[i] > arr[maxIdx]) {
+                maxIdx = i;
+            }
+        }
+        
+        swap(arr[start], arr[minIdx]);
+        
+        if (maxIdx == start) {
+            maxIdx = minIdx;
+        }
+        
+        swap(arr[end], arr[maxIdx]);
+        
+        start++;
+        end--;
+    }
+}
+
+void printArray(vector<int>& arr) {
+    for (int num : arr) {
+        cout << num << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    vector<int> arr = {64, 25, 12, 22, 11, 90, 45, 33};
+    
+    cout << "Original array: ";
+    printArray(arr);
+    
+    improvedSelectionSort(arr);
+    
+    cout << "Sorted array (Improved Selection Sort): ";
+    printArray(arr);
+    
+    return 0;
+}
